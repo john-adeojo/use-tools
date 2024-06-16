@@ -8,7 +8,7 @@ from toolbox.toolbox import ToolBox
 
 
 class Agent:
-    def __init__(self, tools, model_service, model_name):
+    def __init__(self, tools, model_service, model_name, stop=None):
         """
         Initializes the agent with a list of tools and a model.
 
@@ -20,6 +20,7 @@ class Agent:
         self.tools = tools
         self.model_service = model_service
         self.model_name = model_name
+        self.stop = stop
 
     def prepare_tools(self):
         """
@@ -47,11 +48,20 @@ class Agent:
         agent_system_prompt = agent_system_prompt_template.format(tool_descriptions=tool_descriptions)
 
         # Create an instance of the model service with the system prompt
-        model_instance = self.model_service(
-            model=self.model_name,
-            system_prompt=agent_system_prompt,
-            temperature=0.5
-        )
+
+        if self.model_service == OllamaModel:
+            model_instance = self.model_service(
+                model=self.model_name,
+                system_prompt=agent_system_prompt,
+                temperature=0,
+                stop=self.stop
+            )
+        else:
+            model_instance = self.model_service(
+                model=self.model_name,
+                system_prompt=agent_system_prompt,
+                temperature=0
+            )
 
         # Generate and return the response dictionary
         agent_response_dict = model_instance.generate_text(prompt)
@@ -87,16 +97,23 @@ class Agent:
 # Example usage
 if __name__ == "__main__":
 
-    # model_service = OpenAIModel
-    model_service = OllamaModel
-
     tools = [basic_calculator, reverse_string]
-    model_name = 'llama3:instruct'
 
-    agent = Agent(tools=tools, model_service=model_service, model_name=model_name)
+
+    # Uncoment below to run with OpenAI
+    model_service = OpenAIModel
+    model_name = 'gpt-3.5-turbo'
+    stop = None
+
+    # Uncomment below to run with Ollama
+    # model_service = OllamaModel
+    # model_name = 'llama3:instruct'
+    # stop = "<|eot_id|>"
+
+    agent = Agent(tools=tools, model_service=model_service, model_name=model_name, stop=stop)
 
     while True:
-        prompt = input("Please enter your research question: ")
+        prompt = input("Ask me anything: ")
         if prompt.lower() == "exit":
             break
     

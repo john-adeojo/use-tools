@@ -19,6 +19,7 @@ class OpenAIModel:
             'Authorization': f'Bearer {self.api_key}'
         }
 
+
     def generate_text(self, prompt):
 
         payload = {

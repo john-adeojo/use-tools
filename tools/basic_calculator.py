@@ -7,19 +7,23 @@ def basic_calculator(input_str):
 
     Parameters:
     input_str (str): A JSON string representing a dictionary with keys 'num1', 'num2', and 'operation'.
-                     Example: '{"num1": 5, "num2": 3, "operation": "add"}'
+                     Example: '{"num1": 5, "num2": 3, "operation": "add"}' or "{'num1': 67869, 'num2': 9030393, 'operation': 'divide'}"
 
     Returns:
-    tuple: The result of the operation and a message. For comparison operations, the result is a boolean.
-           For arithmetic operations, the result is a number (int or float).
+    str: The formatted result of the operation.
 
     Raises:
     Exception: If an error occurs during the operation (e.g., division by zero).
     ValueError: If an unsupported operation is requested or input is invalid.
     """
-    # Parse the input string to a dictionary
+    # Clean and parse the input string
     try:
-        input_dict = json.loads(input_str)
+        # Replace single quotes with double quotes
+        input_str_clean = input_str.replace("'", "\"")
+        # Remove any extraneous characters such as trailing quotes
+        input_str_clean = input_str_clean.strip().strip("\"")
+        
+        input_dict = json.loads(input_str_clean)
         num1 = input_dict['num1']
         num2 = input_dict['num2']
         operation = input_dict['operation']
@@ -48,9 +52,7 @@ def basic_calculator(input_str):
         try:
             # Perform the operation
             result = operations[operation](num1, num2)
-
             result_formatted = f"\n\nThe answer is: {result}.\nCalculated with basic_calculator."
-
             return result_formatted
         except Exception as e:
             return str(e), "\n\nError during operation execution."
