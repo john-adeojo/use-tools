@@ -49,7 +49,7 @@ A simple project for enabling LLM agents to use tools.
 
 2. **Download an Ollama Model:**
    ```bash
-   curl http://localhost:11434/api/pull -d "{\"name\": \"llama3\"}"
+   curl http://localhost:11434/api/pull -d "{\"name\": \"llama3:instruct\"}"
    ```
 Ollama [API documentation](https://github.com/ollama/ollama/blob/main/docs/api.md#list-local-models)
 
