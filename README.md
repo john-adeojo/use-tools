@@ -21,8 +21,7 @@ A simple project for enabling LLM agents to use tools.
 ### Clone and Navigate to the Repository
 1. **Clone the Repo:**
    ```bash
-   git clone https://github.com/john-adeojo/use-tools
-.git
+   git clone https://github.com/john-adeojo/use-tools.git
    ```
 2. **Navigate to the Repo:**
    ```bash
