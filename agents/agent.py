@@ -2,6 +2,7 @@ from termcolor import colored
 from prompts.prompts import agent_system_prompt_template
 from models.openai_models import OpenAIModel
 from models.ollama_models import OllamaModel
+from models.groq_models import GroqModel
 from tools.basic_calculator import basic_calculator
 from tools.reverser import reverse_string
 from toolbox.toolbox import ToolBox
@@ -100,10 +101,15 @@ if __name__ == "__main__":
     tools = [basic_calculator, reverse_string]
 
 
-    # Uncoment below to run with OpenAI
+    # Uncomment below to run with OpenAI
     # model_service = OpenAIModel
     # model_name = 'gpt-3.5-turbo'
     # stop = None
+    
+    # Uncomment below to run with GroqAI
+    #model_service = GroqModel
+    #model_name = 'llama3-70b-8192'
+    #stop = None
 
     # Uncomment below to run with Ollama
     model_service = OllamaModel
