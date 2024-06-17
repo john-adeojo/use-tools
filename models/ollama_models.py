@@ -35,7 +35,7 @@ class OllamaModel:
         """
         payload = {
             "model": self.model,
-            "format" "json"
+            "format": "json",
             "prompt": prompt,
             "system": self.system_prompt,
             "stream": False,
@@ -53,11 +53,11 @@ class OllamaModel:
             print("REQUEST RESPONSE", request_response)
             request_response_json = request_response.json()
             response = request_response_json['response']
-            # response_dict = json.loads(response)
+            response_dict = json.loads(response)
 
-            print(f"\n\nResponse from Ollama model: {response}")
+            print(f"\n\nResponse from Ollama model: {response_dict}")
 
-            return response
+            return response_dict
         except requests.RequestException as e:
             response = {"error": f"Error in invoking model! {str(e)}"}
             return response
