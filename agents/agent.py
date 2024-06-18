@@ -5,6 +5,7 @@ from models.ollama_models import OllamaModel
 from models.groq_models import GroqModel
 from tools.basic_calculator import basic_calculator
 from tools.reverser import reverse_string
+from tools.searcher import search
 from toolbox.toolbox import ToolBox
 
 
@@ -98,7 +99,7 @@ class Agent:
 # Example usage
 if __name__ == "__main__":
 
-    tools = [basic_calculator, reverse_string]
+    tools = [basic_calculator, reverse_string, search]
 
 
     # Uncomment below to run with OpenAI
@@ -113,7 +114,7 @@ if __name__ == "__main__":
 
     # Uncomment below to run with Ollama
     model_service = OllamaModel
-    model_name = 'llama3:instruct'
+    model_name = 'codestral:latest'
     stop = "<|eot_id|>"
 
     agent = Agent(tools=tools, model_service=model_service, model_name=model_name, stop=stop)
