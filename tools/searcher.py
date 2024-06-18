@@ -1,3 +1,13 @@
+# @author Sir Lord Dalibor JONIC, MSc BSc (c
+__author__      = "Sir Lord Dalibor JONIC, MSc BSc"
+__copyright__   = "BeMyInspiration 2024"
+__license__     = "MIT"
+__version__     = "1.0.0"
+__maintainer__  = "Sir Lord Dalibor JONIC, MSc BSc"
+__email__       = "dali.manu@gmail.com"
+__status__      = "Production"
+__description__ = "Google searcher with aration"
+
 import requests
 import time
 from bs4 import BeautifulSoup
