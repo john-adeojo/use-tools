@@ -21,7 +21,7 @@ A simple project for enabling LLM agents to use tools.
 ### Clone and Navigate to the Repository
 1. **Clone the Repo:**
    ```bash
-   git clone https://github.com/john-adeojo/use-tools.git
+   git clone https://github.com/dalijon-byte/use-tools.git
    ```
 2. **Navigate to the Repo:**
    ```bash
@@ -56,8 +56,12 @@ Ollama [API documentation](https://github.com/ollama/ollama/blob/main/docs/api.m
 3. Navigate to the bottom of the `agent.py` script and uncomment the Ollama arguments and comment out the OpenAI arguments. 
 
 ### Run Your Query In Shell
+
 ```bash
 python -m agents.agent
 ```
 Then enter your query.
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=dalijon-byte/use-tools&type=Date)](https://star-history.com/#dalijon-byte/use-tools&Date)
