@@ -5,8 +5,10 @@ from models.ollama_models import OllamaModel
 from models.groq_models import GroqModel
 from tools.basic_calculator import basic_calculator
 from tools.reverser import reverse_string
-from tools.searcher import search
+from tools.ddg_searcher import search
 from toolbox.toolbox import ToolBox
+import webbrowser
+
 
 
 class Agent:
@@ -86,8 +88,14 @@ class Agent:
         for tool in self.tools:
             if tool.__name__ == tool_choice:
                 response = tool(tool_input)
-
                 print(colored(response, 'cyan'))
+                if isinstance(response, list):
+                    for result in response:
+                        if isinstance(result, tuple) and len(result) > 1 and isinstance(result[1], str):
+                            url = result[1]
+                            if url.startswith('http'):
+                                webbrowser.open(url)
+                                break
                 return
                 # return tool(tool_input)
 
@@ -123,5 +131,6 @@ if __name__ == "__main__":
         prompt = input("Ask me anything: ")
         if prompt.lower() == "exit":
             break
+        
     
         agent.work(prompt)
