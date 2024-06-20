@@ -28,13 +28,13 @@ def search(query, num_results=5, delay=2, max_retries=1):
     input_str_clean = input_str_clean.replace("'", "\"")
     # Remove any extraneous characters such as trailing quotes
     input_str_clean = input_str_clean.strip().strip("\"")
-    print (query) 
+    #print (query) 
  
-    print (input_str_clean)
+    #print (input_str_clean)
     try:
         parsed_data = json.loads(input_str_clean)
         query_content = parsed_data['query'] 
-        print (parsed_data) 
+        #print (parsed_data) 
         query = query_content  
         results = []
         retries = 0
