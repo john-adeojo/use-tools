@@ -2,9 +2,13 @@ from termcolor import colored
 from prompts.prompts import agent_system_prompt_template
 from models.openai_models import OpenAIModel
 from models.ollama_models import OllamaModel
+from models.groq_models import GroqModel
 from tools.basic_calculator import basic_calculator
 from tools.reverser import reverse_string
+from tools.ddg_searcher import search
 from toolbox.toolbox import ToolBox
+import webbrowser
+
 
 
 class Agent:
@@ -84,8 +88,14 @@ class Agent:
         for tool in self.tools:
             if tool.__name__ == tool_choice:
                 response = tool(tool_input)
-
                 print(colored(response, 'cyan'))
+                if isinstance(response, list):
+                    for result in response:
+                        if isinstance(result, tuple) and len(result) > 1 and isinstance(result[1], str):
+                            url = result[1]
+                            if url.startswith('http'):
+                                webbrowser.open(url)
+                                break
                 return
                 # return tool(tool_input)
 
@@ -97,17 +107,22 @@ class Agent:
 # Example usage
 if __name__ == "__main__":
 
-    tools = [basic_calculator, reverse_string]
+    tools = [basic_calculator, reverse_string, search]
 
 
-    # Uncoment below to run with OpenAI
+    # Uncomment below to run with OpenAI
     # model_service = OpenAIModel
     # model_name = 'gpt-3.5-turbo'
     # stop = None
+    
+    # Uncomment below to run with GroqAI
+    #model_service = GroqModel
+    #model_name = 'llama3-70b-8192'
+    #stop = None
 
     # Uncomment below to run with Ollama
     model_service = OllamaModel
-    model_name = 'llama3:instruct'
+    model_name = 'codestral:latest'
     stop = "<|eot_id|>"
 
     agent = Agent(tools=tools, model_service=model_service, model_name=model_name, stop=stop)
@@ -116,5 +131,6 @@ if __name__ == "__main__":
         prompt = input("Ask me anything: ")
         if prompt.lower() == "exit":
             break
+        
     
         agent.work(prompt)

@@ -1,0 +1,11 @@
+toolvenv/*
+#.gitignore
+agents/__pycache__/*
+prompts/__pycache__/*
+tools/__pycache__/*
+models/__pycache__/*
+toolbox/__pycache__/*
+tests/__pycache__/*
+*/*.egg-info
+*/.pytest_cache
+*/build
